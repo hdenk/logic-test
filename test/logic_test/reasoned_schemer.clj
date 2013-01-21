@@ -8,7 +8,7 @@
     "successful unify"
     (test/is 
       (= 
-        '(_.0) 
+        '(_0) 
         (logic/run* 
           [q] 
           (logic/== :a :a))))
@@ -83,7 +83,7 @@
             '(:a :b))))))
   (test/is 
     (= 
-      [(logic/lcons :a '_.0)]
+      [(logic/lcons :a '_0)]
       (logic/run* 
         [q] 
         (logic/fresh 
@@ -93,7 +93,7 @@
             x
             q))))))
 
-(test/deftest listo
+#_(test/deftest listo
   (test/testing 
     "listo"
     (test/is 
@@ -101,7 +101,7 @@
         '()
         (logic/run* 
           [x]
-          (logic/conso (list :a :b x :c))))))) 
+          (logic/listo (list :a :b x :c))))))) 
 
 
 (test/deftest membero
@@ -127,7 +127,7 @@
           (logic/membero :e (list :pasta x :fagioli))))) 
     (test/is ; 3.69
       (= 
-        '(_.0)
+        '(_0)
         (logic/run 1
           [x]
           (logic/membero :e (list :pasta :e x :fagioli)))))
@@ -139,18 +139,16 @@
           (logic/membero :e (list :pasta x :e :fagioli))))) 
     (test/is 
       (= 
-        '(:e _.0)
+        '(:e _0)
         (logic/run*
           [x]
           (logic/membero :e (list :pasta x :e :fagioli))))) 
    (test/is ; 3.71 
       (= 
-        '((:e _.0) (_.0 :e))
+        '((:e _0) (_0 :e))
         (logic/run*
           [r]
           (logic/fresh 
             [x y]
             (logic/membero :e (list :pasta x :fagioli y))
             (logic/== (list x y) r))))))) 
-
-

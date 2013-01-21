@@ -1,4 +1,3 @@
-logic-test
-==========
+# logic-test 
 
-core.logic analysieren/ausprobieren
+[![Travis CI status](https://api.travis-ci.org/hdenk/logic-test.png)](http://travis-ci.org/#!/hdenk/logic-test/builds)

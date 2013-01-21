@@ -112,7 +112,7 @@
          '((a c b d)))))
 
 ;;
-;; flatteno (TRS)
+;; flatteno (The Reasoned Schemer)
 ;;
 
 (defn pairo [p]

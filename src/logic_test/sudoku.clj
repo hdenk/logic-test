@@ -1,6 +1,7 @@
 (ns logic-test.sudoku
   (:refer-clojure :exclude [==])
-  (:use clojure.core.logic))
+  (:require [clojure.core.logic :as l]
+            [clojure.core.logic.fd :as fd]))
 
 (defn get-square [rows x y]
   (for [x (range x (+ x 3))
@@ -10,27 +11,27 @@
 (defn init [vars hints]
   (if (seq vars)
     (let [hint (first hints)]
-      (all
+      (l/all
         (if-not (zero? hint)
-          (== (first vars) hint)
-          succeed)
+          (l/== (first vars) hint)
+          l/succeed)
         (init (next vars) (next hints))))
-    succeed))
+    l/succeed))
 
 (defn sudokufd [hints]
-  (let [vars (repeatedly 81 lvar)
+  (let [vars (repeatedly 81 l/lvar)
         rows (->> vars (partition 9) (map vec) (into []))
         cols (apply map vector rows)
         sqs (for [x (range 0 9 3)
                    y (range 0 9 3)]
                (get-square rows x y))]
-    (run 1 [q]
-      (== q vars)
-      (everyo #(infd % (domain 1 2 3 4 5 6 7 8 9)) vars)
+    (l/run 1 [q]
+      (l/== q vars)
+      (l/everyg #(fd/in % (fd/domain 1 2 3 4 5 6 7 8 9)) vars)
       (init vars hints)
-      (everyo distinctfd rows)
-      (everyo distinctfd cols)
-      (everyo distinctfd sqs))))
+      (l/everyg fd/distinct rows)
+      (l/everyg fd/distinct cols)
+      (l/everyg fd/distinct sqs))))
 
 ;; ====
 

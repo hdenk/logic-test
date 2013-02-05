@@ -1,11 +1,9 @@
 (ns logic-test.sudoku-test
-  (:refer-clojure :exclude [==])
-  (:require [logic-test.sudoku :as sudoku]
-    [clojure.core.logic :as logic]
-    [clojure.test :as test]))
+  (:use [clojure.test :only [deftest is]])
+  (:require [logic-test.sudoku :as sudoku]))
 
-(test/deftest sudoku
-  (test/is
+(deftest sudoku
+  (is
     (=
       '((4 8 3 9 2 1 6 5 7 
          9 6 7 3 4 5 8 2 1 
